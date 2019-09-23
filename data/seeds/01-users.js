@@ -4,6 +4,9 @@ exports.seed = function(knex, promise) {
       {
         username: "Adam",
         password: "password"
+      },
+      {  username: "Joey",
+         password: "passoftheword"
       }
     ])
   }

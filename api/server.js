@@ -9,10 +9,7 @@ console.log('environment', process.env.DB_ENV)
 
 server.use(helmet())
 server.use(express.json())
-server.use(cors({
-    origin: '*',
-    credentials: true
-}))
+server.use(cors())
 server.use('/api/users', usersRouter)
 
 

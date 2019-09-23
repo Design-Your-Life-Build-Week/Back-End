@@ -21,10 +21,10 @@ exports.up = function(knex) {
         .datetime('dateCreated').defaultTo(knex.fn.now())
         //foreign key
       users
-        .integer('user_id')
+        .integer('category_id')
         .unsigned()
         .references('id')
-        .inTable('users')
+        .inTable('categories')
         .onDelete('CASCADE')
         .onUpdate('CASCADE')
     })
