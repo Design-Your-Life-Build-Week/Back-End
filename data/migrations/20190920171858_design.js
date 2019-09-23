@@ -7,48 +7,58 @@ exports.up = function(knex) {
         .unique();
       users.string('password', 255)
     })
-    .createTable('daily_logs', users => {
+    .createTable('activities', users => {
       users.increments()
       users
-        .string('activity')
+        .string('name')
         .notNullable()
-        .unique()
+        .unique()      
       users
-        .string('category')
-        .notNullable()
-      users
-        .integer('rating')
-        .defaultTo(false)
+        .integer('starRating')        
       users
         .string('reflections', 500)
+      users
+        .datetime('dateCreated').defaultTo(knex.fn.now())
         //foreign key
       users
-        .integer('daily_log_id')
+        .integer('user_id')
         .unsigned()
         .references('id')
         .inTable('users')
         .onDelete('CASCADE')
         .onUpdate('CASCADE')
     })
-    .createTable('reflections', users => {
+    .createTable('categories', users => {
       users.increments()
       users
-        .string('reflection', 500)
+        .string('name')
         .notNullable(),
-      //foreign key
       users
-        .integer('reflections_id')
+        .datetime('dateCreated').defaultTo(knex.fn.now())     
+      })
+    .createTable('keys', users => {
+      users
+        .integer('user_id')
         .unsigned()
         .references('id')
         .inTable('users')
         .onDelete('CASCADE')
-        .onUpdate('CASCADE')      
+        .onUpdate('CASCADE')
+      users
+        .integer('categories_id')
+        .unsigned()
+        .references('id')
+        .inTable('categories')
+        .onDelete('CASCADE')
+        .onUpdate('CASCADE')
     })
   };
   
-  exports.down = function(knex, Promise) {
-    return knex.schema.dropTableIfExists('users')
-      .dropTableIfExists('daily_logs')
-      .dropTableIfExists('reflections')
+  exports.down = function(knex) {
+    return knex.schema
+      .dropTableIfExists('users')
+      .dropTableIfExists('activities')
+      .dropTableIfExists('categories')
+      .dropTableIfExists('keys')
   };
   

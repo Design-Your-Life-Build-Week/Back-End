@@ -3,6 +3,10 @@ const bcrypt = require('bcryptjs');
 const Users = require('./users-model.js')
 const router = express.Router();
 const jwt = require('jsonwebtoken')
+const knex = require('knex')
+const knexfile = require('../knexfile.js')
+const knexConfig = knexfile.development
+const db = knex(knexConfig)
 
 
 
@@ -43,8 +47,9 @@ router.get('/registered', (req, res) => {
         .catch(error => res.send(error))
 })
 
-router.get('/logs', (req, res) => {
-    Users.yeah()
+router.get('/logs/:id', (req, res) => {
+    const {id} = req.params
+    Users.yeah(id)
     .then(logs => {
         res.json(logs)
     })

@@ -3,11 +3,16 @@ const dbConnection = require ('../data/dbConfig.js')
 const usersRouter = require('../users/users-router.js')
 const server = express()
 const helmet = require('helmet')
+const cors = require('cors')
 
-console.log('environment', process.env.NODE_ENV)
+console.log('environment', process.env.DB_ENV)
 
 server.use(helmet())
 server.use(express.json())
+server.use(cors({
+    origin: '*',
+    credentials: true
+}))
 server.use('/api/users', usersRouter)
 
 

@@ -12,8 +12,10 @@ function find() {
     return db('users').select('id', 'username', 'password')
 }
 
-function yeah() {
-    returndb('daily_logs').select('id', 'activity', 'category', 'rating', 'reflection')
+function yeah(id) {
+    return db('activities')
+    .where({user_id: id})
+    
 }
 
 function findBy(filter) {
