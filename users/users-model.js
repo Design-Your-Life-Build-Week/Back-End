@@ -4,11 +4,16 @@ module.exports = {
     add,
     find,
     findBy,
-    findById
+    findById,
+    yeah
 }
 
 function find() {
     return db('users').select('id', 'username', 'password')
+}
+
+function yeah() {
+    returndb('daily_logs').select('id', 'activity', 'category', 'rating', 'reflection')
 }
 
 function findBy(filter) {

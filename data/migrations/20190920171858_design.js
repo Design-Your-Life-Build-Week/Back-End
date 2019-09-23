@@ -17,8 +17,10 @@ exports.up = function(knex) {
         .string('category')
         .notNullable()
       users
-        .boolean('rating')
+        .integer('rating')
         .defaultTo(false)
+      users
+        .string('reflections', 500)
         //foreign key
       users
         .integer('daily_log_id')

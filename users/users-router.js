@@ -43,6 +43,14 @@ router.get('/registered', (req, res) => {
         .catch(error => res.send(error))
 })
 
+router.get('/logs', (req, res) => {
+    Users.yeah()
+    .then(logs => {
+        res.json(logs)
+    })
+    .catch(error => res.send(error))
+})
+
 function generateToken(user) {
     const payload = {
         username: user.username
