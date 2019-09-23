@@ -13,6 +13,9 @@ router.post('/register', (req, res) => {
     .then(registeredUser => {
         res.send(registeredUser)
     })
+    .catch(error => {
+        res.status(500).json(error)
+    })
 });
 
 router.post('/login', (req, res) =>{
@@ -30,6 +33,14 @@ router.post('/login', (req, res) =>{
     .catch(error => {
         res.status(500).json(error)
     })
+})
+
+router.get('/registered', (req, res) => {
+    Users.find()
+        .then(users => {
+            res.json(users)
+        })
+        .catch(error => res.send(error))
 })
 
 function generateToken(user) {
