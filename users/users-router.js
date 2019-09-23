@@ -35,6 +35,13 @@ router.post('/login', (req, res) =>{
     })
 })
 
+router.get('/registered', (req, res) => {
+    Users.find()
+        .then(users => {
+            res.json(users)
+        })
+        .catch(error => res.send(error))
+})
 
 function generateToken(user) {
     const payload = {
