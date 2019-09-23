@@ -6,6 +6,12 @@ exports.seed = function(knex, promise) {
       },
       {
         name: "fitness"
+      },
+      {
+        name: "relationship"
+      },
+      {
+        name: "personal"
       }
     ])
   }

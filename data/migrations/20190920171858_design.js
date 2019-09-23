@@ -21,7 +21,7 @@ exports.up = function(knex) {
         .datetime('dateCreated').defaultTo(knex.fn.now())
         //foreign key
       users
-        .integer('category_id')
+        .integer('categories_id')
         .unsigned()
         .references('id')
         .inTable('categories')
