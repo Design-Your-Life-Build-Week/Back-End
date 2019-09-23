@@ -17,7 +17,7 @@ exports.up = function(knex) {
         .string('category')
         .notNullable()
       users
-        .boolean('completed')
+        .boolean('rating')
         .defaultTo(false)
         //foreign key
       users
