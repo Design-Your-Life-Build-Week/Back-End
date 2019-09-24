@@ -24,4 +24,23 @@ router.post('/', (req, res) => {
         })
 })
 
+router.put('/:id', (req, res) => {
+    const { id } = req.params
+    const changes = req.body
+     Acts.findById(id)
+        .then(activity => {
+            if (activity) {
+               return Acts.update(changes, id)
+                .then(updatedActivity => {
+                    res.json(updatedActivity)
+                })
+            } else {
+                res.status(404).json({message: "Could not find activity with ID"})
+            }
+        })
+        .catch(error => {
+            res.status(500).json({message: 'Failed to update'})
+        })
+})
+
 module.exports = router
