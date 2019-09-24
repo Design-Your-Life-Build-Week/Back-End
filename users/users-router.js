@@ -39,23 +39,6 @@ router.post('/login', (req, res) =>{
     })
 })
 
-router.get('/registered', (req, res) => {
-    Users.find()
-        .then(users => {
-            res.json(users)
-        })
-        .catch(error => res.send(error))
-})
-
-router.get('/logs/:id', (req, res) => {
-    const {id} = req.params
-    Users.yeah(id)
-    .then(logs => {
-        res.json(logs)
-    })
-    .catch(error => res.send(error))
-})
-
 function generateToken(user) {
     const payload = {
         username: user.username
