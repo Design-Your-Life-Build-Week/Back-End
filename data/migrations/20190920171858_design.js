@@ -7,6 +7,21 @@ exports.up = function(knex) {
         .unique();
       users.string('password', 255)
     })
+    .createTable('categories', users => {
+      users.increments()
+      users
+        .string('name')
+        .notNullable(),
+      users
+        .datetime('dateCreated').defaultTo(knex.fn.now())
+      users
+        .integer('users_id')
+        .unsigned()
+        .references('id')
+        .inTable('users')
+        .onDelete('CASCADE')
+        .onUpdate('CASCADE')     
+      })
     .createTable('activities', users => {
       users.increments()
       users
@@ -27,38 +42,16 @@ exports.up = function(knex) {
         .inTable('categories')
         .onDelete('CASCADE')
         .onUpdate('CASCADE')
-    })
-    .createTable('categories', users => {
-      users.increments()
-      users
-        .string('name')
-        .notNullable(),
-      users
-        .datetime('dateCreated').defaultTo(knex.fn.now())     
-      })
-    .createTable('keys', users => {
-      users
-        .integer('user_id')
-        .unsigned()
-        .references('id')
-        .inTable('users')
-        .onDelete('CASCADE')
-        .onUpdate('CASCADE')
-      users
-        .integer('categories_id')
-        .unsigned()
-        .references('id')
-        .inTable('categories')
-        .onDelete('CASCADE')
-        .onUpdate('CASCADE')
-    })
+    })   
+  
   };
   
   exports.down = function(knex) {
-    return knex.schema
-      .dropTableIfExists('users')
+    return knex.schema      
       .dropTableIfExists('activities')
       .dropTableIfExists('categories')
-      .dropTableIfExists('keys')
+      .dropTableIfExists('users')  
+      
+      
   };
   
