@@ -20,7 +20,6 @@ exports.seed = function(knex, promise) {
       reflections: "A good 5k is lovely",
       categories_id: 2
     },
-
   ])
 }
    
