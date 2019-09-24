@@ -25,7 +25,7 @@ exports.up = function(knex) {
     .createTable('activities', users => {
       users.increments()
       users
-        .string('name')
+        .string('activity_name')
         .notNullable()
         .unique()      
       users
