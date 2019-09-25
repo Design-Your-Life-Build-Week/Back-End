@@ -51,7 +51,7 @@ router.get('/', (req, res) => {
 
 function generateToken(user) {
     const payload = {
-        username: user.username
+        username: user.username, id: user.id
     }
     const secret = "keep it secret, keep it safe"
     const options = {

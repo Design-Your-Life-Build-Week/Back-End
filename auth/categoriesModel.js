@@ -53,7 +53,7 @@ function update(id, change) {
 
 
 function activities(id) {
-    return db('categories').where({id})
+    return db('categories').where({id}).first()
     .then(categories => {
         return db('activities').where({categories_id: id})
         .then(activities => {

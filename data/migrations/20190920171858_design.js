@@ -13,14 +13,7 @@ exports.up = function(knex) {
         .string('name')
         .notNullable(),
       users
-        .datetime('dateCreated').defaultTo(knex.fn.now())
-      users
-        .integer('users_id')
-        .unsigned()
-        .references('id')
-        .inTable('users')
-        .onDelete('CASCADE')
-        .onUpdate('CASCADE')     
+        .datetime('dateCreated').defaultTo(knex.fn.now())         
       })
     .createTable('activities', users => {
       users.increments()
@@ -42,6 +35,13 @@ exports.up = function(knex) {
         .inTable('categories')
         .onDelete('CASCADE')
         .onUpdate('CASCADE')
+      users
+        .integer('users_id')
+        .unsigned()
+        .references('id')
+        .inTable('users')
+        .onDelete('CASCADE')
+        .onUpdate('CASCADE') 
     })   
   
   };

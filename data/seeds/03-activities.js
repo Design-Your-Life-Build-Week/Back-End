@@ -6,25 +6,29 @@ exports.seed = function(knex, promise) {
       activity_name: "Create a Design your life app",      
       starRating: 3,
       reflections: "What a wild ride this is!",
-      categories_id: 1
+      categories_id: 1,
+      users_id: 1
     },
     {
       activity_name: "Create a BE",      
       starRating: 2,
       reflections: "Bugs everywhere!",
-      categories_id: 1
+      categories_id: 1,
+      users_id: 1
     },
     {
       activity_name: "Running",      
       starRating: 5,
       reflections: "A good 5k is lovely",
-      categories_id: 2
+      categories_id: 2,
+      users_id: 2
     },
     {
       activity_name: "walking",      
       starRating: 5,
       reflections: "A good 5k is lovely",
-      categories_id: 3
+      categories_id: 3,
+      users_id: 2
     }
   ])
 }
