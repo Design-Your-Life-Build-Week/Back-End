@@ -2,20 +2,25 @@ exports.seed = function(knex, promise) {
     // Deletes ALL existing entries
     return knex('categories').insert([
       {
-        name: "fitness",
-                
+        name: "physical & health",                
       },
       {
-        name: "shopping",
-        
+        name: "personal & social",        
       },
       {
-        name: "outdoors",
-        
+        name: "work & career",        
       },
       {
-        name: "family activities",
-        
+        name: "family",        
+      },
+      {
+        name: "spiritual"
+      },
+      {
+        name: "financial"
+      },
+      {
+        name: "mind & intellect"
       }
     ])
   }
