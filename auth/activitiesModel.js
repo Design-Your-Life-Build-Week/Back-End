@@ -14,7 +14,7 @@ function find() {
 
 function findById(id) {
     return db('activities')
-    .where({id}).first()
+    .where("id", id).first()
 }
 
 function insert(activity) {

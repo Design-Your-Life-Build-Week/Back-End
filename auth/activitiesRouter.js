@@ -13,8 +13,31 @@ router.get('/', restricted, (req, res) => {
         })
 })
 
+router.get('/:id', restricted, (req, res) => {
+    const {id} = req.params
+    Acts.findById(id)
+        .then(activity => {
+            if (activity) {
+                res.json(activity)
+            } else {
+                res.status(404).json({message: "could not find with ID"})
+            }
+        })
+        .catch(error => {
+            res.status(500).json({message: "Failed to get activity"})
+        })
+})
+
+
 router.post('/', restricted, (req, res) => {
     const activityData = req.body
+    const user_id = req.user.id
+    console.log('req', req)
+    console.log('user_id', user_id)
+    console.log(activityData)
+    if(activityData.starRating < 1 || activityData.starRating > 5) {
+        return res.status(400).json({message: "StarRating must be 1-5"})
+    } 
     Acts.insert(activityData)
         .then(activities => {
             res.status(200).json(activities)
@@ -28,6 +51,9 @@ router.put('/:id', restricted, (req, res) => {
     const { id } = req.params
     
     const changes = req.body
+    if(changes.starRating < 1 || changes.starRating > 5) {
+        return res.status(400).json({message: "StarRating must be 1-5"})
+    }
     console.log(changes)
     
      Acts.findById(id)
