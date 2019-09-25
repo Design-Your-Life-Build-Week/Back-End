@@ -38,7 +38,7 @@ router.post('/', restricted, (req, res) => {
     })
 })
 
-router.get('/activities/:id', restricted, (req, res) => {
+router.get('/something/categories/:id', restricted, (req, res) => {
     const {id} = req.params
     Users.activities(id)
         .then(categories => {
@@ -46,6 +46,27 @@ router.get('/activities/:id', restricted, (req, res) => {
         })
         .catch(error => {
             res.status(500).json({message: "could not retrieve"})
+        })
+})
+
+router.put('/:id', restricted, (req, res) => {
+    const {id} = req.params
+    const change = req.body
+
+    Users.getCategoriesById(id)
+        .then(category => {
+            if(category) {
+                return Users.update(id, change)
+                .then(updatedCategory => {
+                    res.json(updatedCategory)
+                })          
+                
+            } else {
+                res.status(404).json({message: 'Could not find category by ID'})
+            }
+        })
+        .catch(error => {
+            res.status(500).json({message: "failed to update"})
         })
 })
 

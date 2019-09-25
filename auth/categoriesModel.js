@@ -3,11 +3,13 @@ const db = require('../data/dbConfig.js')
 module.exports = {
     getUsers,
     getCategories,
+    getCategoriesById,
     getActivities,
     getCategoryByUser,
     activities,
     insert,
-    remove
+    remove,
+    update
 }
 
 function getUsers() {
@@ -16,6 +18,10 @@ function getUsers() {
 
 function getCategories() {
     return db('categories')
+}
+
+function getCategoriesById(id) {
+    return db('categories').where({id: id}).first()
 }
 
 function getActivities() {
@@ -38,6 +44,11 @@ function remove(id) {
         .where('id', id)
         .del()   
     
+}
+
+function update(id, change) {
+    return db('categories')
+    .where({id}).update(change)
 }
 
 
