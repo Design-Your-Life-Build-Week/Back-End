@@ -13,7 +13,7 @@ server.use(helmet())
 server.use(express.json())
 server.use(cors())
 server.use('/api/users', usersRouter)
-server.use('/api', categoriesRouter)
+server.use('/api/categories', categoriesRouter)
 server.use('/api/activities', activitiesRouter)
 
 server.get('/', (req, res) => {

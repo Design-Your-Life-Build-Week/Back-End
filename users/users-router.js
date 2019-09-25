@@ -39,6 +39,16 @@ router.post('/login', (req, res) =>{
     })
 })
 
+router.get('/', (req, res) => {
+    Users.find()
+        .then(users => {
+            res.status(200).json(users)
+        })
+        .catch(error => {
+            res.status(500).json({message: "Can not retrieve"})
+        })
+})
+
 function generateToken(user) {
     const payload = {
         username: user.username

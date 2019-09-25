@@ -4,7 +4,8 @@ module.exports = {
     find,
     findById,
     insert,
-    update
+    update,
+    remove
 }
 
 function find() {
@@ -26,6 +27,11 @@ function insert(activity) {
 
 function update(id, change) {
     return db('activities')
-        .where ({id}).update(change)
-        
+        .where ({id}).update(change)        
+}
+
+function remove(id) {
+    return db('activities')
+        .where('id', id)
+        .del()
 }

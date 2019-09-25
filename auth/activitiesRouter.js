@@ -3,7 +3,7 @@ const restricted = require('./auth-middleware.js')
 const jwt = require('jsonwebtoken')
 const Acts = require('./activitiesModel.js')
 
-router.get('/', (req, res) => {
+router.get('/', restricted, (req, res) => {
     Acts.find()
         .then(activities => {
             res.status(200).json(activities)
@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
         })
 })
 
-router.post('/', (req, res) => {
+router.post('/', restricted, (req, res) => {
     const activityData = req.body
     Acts.insert(activityData)
         .then(activities => {
@@ -24,14 +24,16 @@ router.post('/', (req, res) => {
         })
 })
 
-router.put('/:id', (req, res) => {
+router.put('/:id', restricted, (req, res) => {
     const { id } = req.params
     const changes = req.body
+    console.log(changes)
+    
      Acts.findById(id)
         .then(activity => {
             if (activity) {
-               return Acts.update(changes, id)
-                .then(updatedActivity => {
+               return Acts.update(id, changes)
+                .then(updatedActivity => {                    
                     res.json(updatedActivity)
                 })
             } else {
@@ -42,5 +44,21 @@ router.put('/:id', (req, res) => {
             res.status(500).json({message: 'Failed to update'})
         })
 })
+
+router.delete('/:id', restricted, (req, res) => {
+    const {id} = req.params
+    Acts.remove(id)
+        .then(deleted => {
+            if(deleted) {
+                return res.status(204).end()
+            } else {
+                res.status(404).json({message: "Could not delete"})
+            }
+        }) 
+        .catch(error => {
+            res.status(500).json({message: "failed to delete"})
+        })
+})
+
 
 module.exports = router

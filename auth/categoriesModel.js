@@ -42,12 +42,12 @@ function remove(id) {
 
 
 function activities(id) {
-    return db('categories').where({users_id: id})
+    return db('categories').where({id})
     .then(categories => {
         return db('activities').where({categories_id: id})
         .then(activities => {
-            categories.activities = activities
-            return categories.activities
+            categories.activities = activities;
+            return categories
         })
     })     
 }
