@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken')
 const Acts = require('./activitiesModel.js')
 
 router.get('/', restricted, (req, res) => {
+    
     Acts.find()
         .then(activities => {
             res.status(200).json(activities)
@@ -31,19 +32,20 @@ router.get('/:id', restricted, (req, res) => {
 
 router.post('/', restricted, (req, res) => {
     const activityData = req.body
-    const user_id = req.user.id
-    console.log('req', req)
-    console.log('user_id', user_id)
-    console.log(activityData)
+    const users_id = req.user.id
+    console.log('req', req.user)
+    console.log('user_id', users_id)
+    
     if(activityData.starRating < 1 || activityData.starRating > 5) {
         return res.status(400).json({message: "StarRating must be 1-5"})
     } 
-    Acts.insert(activityData)
+    Acts.insert({...activityData, users_id})
         .then(activities => {
             res.status(200).json(activities)
         })
         .catch(error => {
             res.status(500).json({message: "failed to post"})
+            console.log(error)
         })
 })
 
