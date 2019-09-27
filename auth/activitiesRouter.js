@@ -38,6 +38,7 @@ router.post('/', restricted, (req, res) => {
     
     if(activityData.starRating < 1 || activityData.starRating > 5) {
         return res.status(400).json({message: "StarRating must be 1-5"})
+        
     } 
     Acts.insert({...activityData, users_id})
         .then(activities => {
@@ -46,6 +47,7 @@ router.post('/', restricted, (req, res) => {
         .catch(error => {
             res.status(500).json({message: "failed to post"})
             console.log(error)
+            console.log(res.status(400))
         })
 })
 
