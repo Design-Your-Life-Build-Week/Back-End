@@ -1,10 +1,15 @@
 const db = require('../data/dbConfig.js')
 
 module.exports = {
+    all,
     add,
     find,
     findBy,
-    findById
+    findById,
+}
+
+function all() {
+    return db('users')
 }
 
 function find() {
